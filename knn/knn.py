@@ -51,17 +51,8 @@ class KnnRegression(KnnRegressionInterface):
             for i in range(data.shape[0]):
                 if data[i].shape[0] != n_cols:
                     raise ValueError("Inhomogeneous shape of data array")
-                    
-
-            
-
-
-                
-            #TO IMPLEMENT KNN HERE
-            
-            
-            
-            return -1.0
+                       
+         
         except ValueError as e:
             raise ValueError("Error:", e)
             return -1.0
