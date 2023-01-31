@@ -63,22 +63,3 @@ class KnnRegression(KnnRegressionInterface):
             print("Error:", e)
             return -1
    
-  
-def main():
-    n_neighbors = 3
-    data = np.array([[5,1, 230],
-                 [6, 2, 745],
-                 [6, 6, 1080],
-                 [4, 3, 495],
-                 [2, 5, 260]])
-
-    query = np.array([5, 4])
-    try:
-        resp = KnnRegression.knn_regression(n_neighbors, data, query)
-    except ValueError as e:
-        print(e)
-        return
-    print(resp)
-    
-if __name__ == "__main__":
-    main()
