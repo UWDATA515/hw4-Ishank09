@@ -52,7 +52,20 @@ class KnnRegression(KnnRegressionInterface):
                 if data[i].shape[0] != n_cols:
                     raise ValueError("Inhomogeneous shape of data array")
                        
-         
+            #KNN
+            def calculate_distance(x,y):
+                return np.sqrt(np.sum((x-y)**2))
+            distances = []
+            for d in data:
+                dist = calculate_distance(query, d[:-1])
+                distances.append(dist)
+            distances = np.array(distances)
+            sorted_distances = np.argsort(distances)
+            nearest_neighbors = sorted_distances[:n_neighbors]
+            var1 = [data[i][-1] for i in nearest_neighbors]
+            var2 = np.mean(var1)
+            return round(var2, 2)
+            
         except ValueError as e:
             raise ValueError("Error:", e)
             return -1.0
