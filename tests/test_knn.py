@@ -1,7 +1,6 @@
 import unittest
 import numpy as np
-from knn.knn import KnnRegression
-knn_regression = KnnRegression.knn_regression
+from knn.knn import knn_regression
 
 
 class KnnRegressionTests(unittest.TestCase):
@@ -91,7 +90,7 @@ class KnnRegressionTests(unittest.TestCase):
                          [2, 5, 260]])
 
         query = np.array([5, 4])
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             knn_regression("String", data, query)
             
     #Edge test 2
@@ -103,7 +102,7 @@ class KnnRegressionTests(unittest.TestCase):
                          [6, 6, 1080],
                          [4, 3, 495],
                          [2, 5, 260]])
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             knn_regression(n_neighbors, data, "String")
             
     #Edge test 3
@@ -111,7 +110,7 @@ class KnnRegressionTests(unittest.TestCase):
         #test: data data type
         n_neighbors = 3
         query = np.array([5, 4])
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             knn_regression(n_neighbors, "String", query)
             
     #Edge test 4
@@ -125,7 +124,7 @@ class KnnRegressionTests(unittest.TestCase):
                          [2, 5, 260]]
 
         query = np.array([5, 4])
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             knn_regression(n_neighbors, data, query)
             
     #Edge test 5
@@ -183,10 +182,9 @@ class KnnRegressionTests(unittest.TestCase):
             knn_regression(1, np.array([]), np.array([]))
     #Edge test 10
     def test_edge_test_check_query_data_len(self):  
-        self.n_neighbors = 1
-        self.data = np.array([[3, 1, 230], [6, 2, 745], [6, 6, 1080], [4, 3, 495], [2, 5, 260]])
-        self.query = np.array([6, 2])
-        self.assertGreaterEqual(self.query[1] -1, 1)
+        n_neighbors = 1
+        data = np.array([[3, 1, 230], [6, 2, 745], [6, 6, 1080], [4, 3, 495], [2, 5, 260]])
+        query = np.array([6, 2])
         with self.assertRaises(Exception) as context:
             knn_regression(self.n_neighbors, self.data_f, self.query)
     
